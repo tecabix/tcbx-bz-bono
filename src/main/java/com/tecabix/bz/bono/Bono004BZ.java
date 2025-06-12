@@ -13,23 +13,55 @@ import com.tecabix.res.b.RSB004;
 import com.tecabix.sv.rq.RQSV005;
 
 /**
-*
-* @author Ramirez Urrutia Angel Abinadi
-*/
+ *
+ * @author Ramirez Urrutia Angel Abinadi
+ */
 public class Bono004BZ {
 
-	private BonoAhorroRepository bonoAhorroRepository;
-	
-	private String NO_SE_ENCONTRO_EL_BONO = "No se encontró el bono.";
-	
-	private Catalogo activo;
-	
-    public Bono004BZ(Bono004BzDTO dto) {
-		this.bonoAhorroRepository = dto.getBonoAhorroRepository();
-		this.activo = dto.getActivo();
-	}
+    /**
+     * Repositorio para acceder a la entidad BonoAhorro.
+     */
+    private BonoAhorroRepository bonoAhorroRepository;
 
-	public ResponseEntity<RSB004> obtenerCTA(final RQSV005 rqsv005) {
+    /**
+     * Mensaje bono no encontrado.
+     */
+    private static final String NO_SE_ENCONTRO_EL_BONO;
+
+    static {
+        NO_SE_ENCONTRO_EL_BONO = "No se encontró el bono.";
+    }
+
+    /**
+     * Estado "activo" obtenido desde el catálogo.
+     */
+    private Catalogo activo;
+
+    /**
+     * Constructor que inicializa el repositorio de bono ahorro y el estado
+     * activo desde el DTO.
+     *
+     * @param dto objeto de transferencia con los datos necesarios.
+     */
+    public Bono004BZ(final Bono004BzDTO dto) {
+        this.bonoAhorroRepository = dto.getBonoAhorroRepository();
+        this.activo = dto.getActivo();
+    }
+
+    /**
+     * Obtiene un Bono de Ahorro (CTA) específico.
+     * <p>
+     * Busca el bono a partir de la clave proporcionada y verifica que est
+     * activo y pertenezca al usuario de la sesión.
+     * </p>
+     *
+     * @param rqsv005 objeto de solicitud que contiene la sesión, la clave del
+     *                bono y el contenedor de respuesta
+     *                {@link RQSV005#getRsb004()}
+     * @return ResponseEntity con el objeto {@link RSB004} que encapsula el bono
+     *         encontrado o un error en caso de no hallarlo.
+     */
+    public ResponseEntity<RSB004> obtenerCTA(final RQSV005 rqsv005) {
         RSB004 rsb004 = rqsv005.getRsb004();
         Sesion sesion = rqsv005.getSesion();
         UUID clave = rqsv005.getClave();

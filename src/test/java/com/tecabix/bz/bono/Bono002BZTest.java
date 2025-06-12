@@ -32,33 +32,58 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 /**
-*
-* @author Ramirez Urrutia Angel Abinadi
-*/
+ *
+ * @author Ramirez Urrutia Angel Abinadi
+ */
 @ExtendWith(MockitoExtension.class)
 class Bono002BZTest {
 
+
+    /**
+     * Repositorio simulado para pruebas de bonos de ahorro.
+     */
     @Mock
     private BonoAhorroRepository ahorroRepository;
 
+    /**
+     * Repositorio simulado para pruebas de bonos de inversión.
+     */
     @Mock
     private BonoInversionRepository inversionRepository;
 
+    /**
+     * Repositorio simulado para pruebas de bonos de pago.
+     */
     @Mock
     private BonoPagoRepository pagoRepository;
 
+    /**
+     * Servicio simulado RSB002 utilizado en pruebas.
+     */
     @Mock
     private RSB002 rsb002;
 
+    /**
+     * Servicio simulado RQSV003 utilizado en pruebas.
+     */
     @Mock
     private RQSV003 rqsv003;
 
+    /**
+     * Sesión simulada del usuario para pruebas.
+     */
     @Mock
     private Sesion sesion;
 
+    /**
+     * Usuario simulado para pruebas.
+     */
     @Mock
     private Usuario usuario;
 
+    /**
+     * Instancia de la clase bajo prueba.
+     */
     private Bono002BZ bono002bz;
 
     @BeforeEach
@@ -75,7 +100,8 @@ class Bono002BZTest {
     @Test
     void obtenerBonoRetornaRespuestaExitosa() {
         Page<BonoAhorro> ahorros = new PageImpl<>(Collections.emptyList());
-        Page<BonoInversion> inversiones = new PageImpl<>(Collections.emptyList());
+        Page<BonoInversion> inversiones;
+        inversiones = new PageImpl<>(Collections.emptyList());
         Page<BonoPago> pagares = new PageImpl<>(Collections.emptyList());
 
         when(usuario.getId()).thenReturn(1L);
@@ -83,17 +109,42 @@ class Bono002BZTest {
         when(rqsv003.getSesion()).thenReturn(sesion);
         when(rqsv003.getRsb002()).thenReturn(rsb002);
 
-        when(ahorroRepository.findByUsuario(anyLong(), eq(1), any(Pageable.class))).thenReturn(ahorros);
-        when(inversionRepository.findByUsuario(anyLong(), eq(1), any(Pageable.class))).thenReturn(inversiones);
-        when(pagoRepository.findByUsuario(anyLong(), eq(1), any(Pageable.class))).thenReturn(pagares);
-        when(rsb002.ok(ahorros, inversiones, pagares)).thenReturn(ResponseEntity.ok(rsb002));
+        when(ahorroRepository.findByUsuario(
+                anyLong(),
+                eq(1),
+                any(Pageable.class)))
+            .thenReturn(ahorros);
+        when(inversionRepository.findByUsuario(
+                anyLong(),
+                eq(1),
+                any(Pageable.class)))
+            .thenReturn(inversiones);
+        when(pagoRepository.findByUsuario(
+                anyLong(),
+                eq(1),
+                any(Pageable.class)))
+            .thenReturn(pagares);
+        when(rsb002.ok(ahorros, inversiones, pagares))
+            .thenReturn(ResponseEntity.ok(rsb002));
 
         ResponseEntity<RSB002> response = bono002bz.obtenerBono(rqsv003);
 
         assertEquals(ResponseEntity.ok(rsb002), response);
-        verify(ahorroRepository).findByUsuario(anyLong(), eq(1), any(Pageable.class));
-        verify(inversionRepository).findByUsuario(anyLong(), eq(1), any(Pageable.class));
-        verify(pagoRepository).findByUsuario(anyLong(), eq(1), any(Pageable.class));
+        verify(ahorroRepository).findByUsuario(
+            anyLong(),
+            eq(1),
+            any(Pageable.class)
+        );
+        verify(inversionRepository).findByUsuario(
+            anyLong(),
+            eq(1),
+            any(Pageable.class)
+        );
+        verify(pagoRepository).findByUsuario(
+            anyLong(),
+            eq(1),
+            any(Pageable.class)
+        );
         verify(rsb002).ok(ahorros, inversiones, pagares);
     }
 

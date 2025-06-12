@@ -16,17 +16,36 @@ import com.tecabix.sv.rq.RQSV002;
  * @author Ramirez Urrutia Angel Abinadi
  */
 public class Bono001BZ {
-	
-	private BonoRepository bonoRepository;
-	
-	public Bono001BZ(BonoRepository repository) {
-		if(repository == null) {
-			
-		}
-		this.bonoRepository = repository;
-	}
 
-	public ResponseEntity<RSB005> buscarSubasta(final RQSV002 rqsv002) {
+    /**
+     * Repositorio para acceder a la entidad Bono.
+     */
+    private BonoRepository bonoRepository;
+
+    /**
+     * Constructor de la clase {@code Bono001BZ}.
+     *
+     * @param repository el repositorio de bonos que se utilizará para acceder a
+     *                   los datos de persistencia.
+     */
+    public Bono001BZ(final BonoRepository repository) {
+        this.bonoRepository = repository;
+    }
+
+    /**
+     * Busca y retorna los bonos en subasta.
+     * <p>
+     * Este método consulta el repositorio de bonos para obtener aquellos que se
+     * encuentran en estado pendiente, utilizando un pageable que obtiene todos
+     * los registros ordenados por el identificador de forma ascendente.
+     * </p>
+     *
+     * @param rqsv002 objeto de solicitud que contiene el contenedor de
+     *                respuesta {@link RQSV002#getRsb005()}
+     * @return ResponseEntity con el objeto {@link RSB005} que encapsula la
+     *                        lista de bonos en subasta.
+     */
+    public ResponseEntity<RSB005> buscarSubasta(final RQSV002 rqsv002) {
         RSB005 rsb005 = rqsv002.getRsb005();
         Pageable pageable;
         Sort sort = Sort.by(Sort.Direction.ASC, "id");
