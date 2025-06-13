@@ -9,6 +9,8 @@ import java.util.UUID;
 import org.springframework.http.ResponseEntity;
 
 import com.tecabix.bz.bono.dto.Bono003BzDTO;
+import com.tecabix.bz.bono.dto.Bono003BzTrDTO;
+import com.tecabix.bz.bono.tr.Bono003BzTr;
 import com.tecabix.db.entity.BonoAhorro;
 import com.tecabix.db.entity.BonoAhorroPeriodo;
 import com.tecabix.db.entity.Catalogo;
@@ -24,55 +26,172 @@ import com.tecabix.res.b.RSB003;
 import com.tecabix.sv.rq.RQSV004;
 
 /**
-*
-* @author Ramirez Urrutia Angel Abinadi
-*/
+ *
+ * @author Ramirez Urrutia Angel Abinadi
+ */
 public class Bono003BZ {
 
-    private BonoRepository bonoRepository;
-    private CuentaRepository cuentaRepository;
-    private BonoAhorroRepository bonoAhorroRepository;
-    private BonoAhorroPeriodoRepository bonoAhorroPeriodoRepository;
-    private TransaccionRepository transaccionRepository;
-    
-    private Catalogo activo;
-    private Catalogo pendiente;
-    private Catalogo eliminado;
-    private Catalogo compra;
-    
-    private Cuenta cuentaInversion;
+    /**
+     * Repositorio para acceder a la entidad Bono.
+     */
+    private final BonoRepository bonoRepository;
 
-    private String NO_SE_ENCONTRO_EL_BONO = "No se encontró el bono.";
-    private String EL_ESTADO_DEBE_ESTAR_PENDIENTE = "El estado del bono debe estar como pendiente.";
-    private String NO_SE_ENCONTRO_LA_CUENTA_DE_ORIGEN = "No se encontró la cuenta de origen.";
-    private String NO_SE_ENCONTRO_LA_CUENTA_DESTINO = "No se encontró la cuenta destino.";
-    private String LA_CUENTA_SON_LA_MISMA = "La cuenta de origen y destino son la misma.";
-    private String EL_SALDO_DEL_ORDENANTE_ES_INSUFICIENTE = "El saldo del ordenante es insuficiente";
+    /**
+     * Repositorio para acceder a la entidad Cuenta.
+     */
+    private final CuentaRepository cuentaRepository;
 
-    private final String CTA14 = "CTA14";
-    private final String CTA27 = "CTA27";
-    private final String CTA53 = "CTA53";
-    
-    private byte CTA_14 = 14;
-    private byte CTA_27 = 27;
-    private byte CTA_53 = 53;
-    
-    private short MONTO = 100_00;
-    private short CINCO_SEGUNDO = 5000;
-    
-    public Bono003BZ(Bono003BzDTO dto) {
-		this.bonoRepository = dto.getBonoRepository();
-		this.cuentaRepository = dto.getCuentaRepository();
-		this.bonoAhorroRepository = dto.getBonoAhorroRepository();
-		this.bonoAhorroPeriodoRepository = dto.getBonoAhorroPeriodoRepository();
-		this.transaccionRepository = dto.getTransaccionRepository();
-		this.activo = dto.getActivo();
-		this.pendiente = dto.getPendiente();
-		this.eliminado = dto.getEliminado();
-		this.compra = dto.getCompra();
-		this.cuentaInversion = dto.getCuentaInversion();
-	}
+    /**
+     * Repositorio para acceder a la entidad BonoAhorro.
+     */
+    private final BonoAhorroRepository bonoAhorroRepository;
 
+    /**
+     * Repositorio para acceder a la entidad BonoAhorroPeriodo.
+     */
+    private final BonoAhorroPeriodoRepository bonoAhorroPeriodoRepository;
+
+    /**
+     * Repositorio para acceder a la entidad Transaccion.
+     */
+    private final TransaccionRepository transaccionRepository;
+
+    /**
+     * Estado "activo" obtenido desde el catálogo.
+     */
+    private final Catalogo activo;
+
+    /**
+     * Estado "Pendiente" obtenido desde el catálogo.
+     */
+    private final Catalogo pendiente;
+
+    /**
+     * Estado "Eliminado" obtenido desde el catálogo.
+     */
+    private final Catalogo eliminado;
+
+    /**
+     * Tipo de transacción "Compra" obtenido desde el catálogo.
+     */
+    private final Catalogo compra;
+
+    /**
+     * Cuenta de inversión asignada.
+     */
+    private final Cuenta cuentaInversion;
+
+    /**
+     * Mensaje cuando no se encuentra el bono.
+     */
+    private static final String NO_SE_ENCONTRO_EL_BONO;
+
+    static {
+
+        NO_SE_ENCONTRO_EL_BONO = "No se encontró el bono.";
+        EL_ESTADO_DEBE_ESTAR_PENDIENTE = "El estado del bono debe estar como pendiente.";
+        NO_SE_ENCONTRO_LA_CUENTA_DE_ORIGEN = "No se encontró la cuenta de origen.";
+        NO_SE_ENCONTRO_LA_CUENTA_DESTINO = "No se encontró la cuenta destino.";
+        LA_CUENTA_SON_LA_MISMA = "La cuenta de origen y destino son la misma.";
+        EL_SALDO_DEL_ORDENANTE_ES_INSUFICIENTE = "El saldo del ordenante es insuficiente";
+    }
+
+    /**
+     * Mensaje cuando el estado de bono debe estar pendiente.
+     */
+    private static final String EL_ESTADO_DEBE_ESTAR_PENDIENTE;
+
+    /**
+     * Mensaje cuando no se encuentra la cuenta origen.
+     */
+    private static final String NO_SE_ENCONTRO_LA_CUENTA_DE_ORIGEN;
+
+    /**
+     * Mensaje cuando no se encuentra la cuenta destino.
+     */
+    private static final String NO_SE_ENCONTRO_LA_CUENTA_DESTINO;
+
+    /**
+     * Mensaje cuando la cuenta origen y destino son la misma.
+     */
+    private static final String LA_CUENTA_SON_LA_MISMA;
+
+    /**
+     * Mensaje cuando el saldo ordenante es insuficiente.
+     */
+    private static final String EL_SALDO_DEL_ORDENANTE_ES_INSUFICIENTE;
+
+
+    /**
+     * Constante para la cuenta CTA53.
+     */
+    private static final String CTA14 = "CTA14";
+
+    /**
+     * Constante para la cuenta CTA53.
+     */
+    private static final String CTA27 = "CTA27";
+
+    /**
+     * Constante para la cuenta CTA53.
+     */
+    private static final String CTA53 = "CTA53";
+
+    /**
+     * Código numérico para la cuenta CTA_14.
+     */
+    private static final byte CTA_14 = 14;
+
+    /**
+     * Código numérico para la cuenta CTA_27.
+     */
+    private static final byte CTA_27 = 27;
+    /**
+     * Código numérico para la cuenta CTA_53.
+     */
+    private static final byte CTA_53 = 53;
+
+    /**
+     * Monto base predeterminado en centavos (equivale a 100.00).
+     */
+    private static final short MONTO = 100_00;
+
+    /**
+     * Constructor que inicializa los repositorios y propiedades del bono desde
+     * el DTO.
+     *
+     * @param dto objeto de transferencia con los datos necesarios para la
+     *            inicialización.
+     */
+    public Bono003BZ(final Bono003BzDTO dto) {
+        this.bonoRepository = dto.getBonoRepository();
+        this.cuentaRepository = dto.getCuentaRepository();
+        this.bonoAhorroRepository = dto.getBonoAhorroRepository();
+        this.bonoAhorroPeriodoRepository = dto.getBonoAhorroPeriodoRepository();
+        this.transaccionRepository = dto.getTransaccionRepository();
+        this.activo = dto.getActivo();
+        this.pendiente = dto.getPendiente();
+        this.eliminado = dto.getEliminado();
+        this.compra = dto.getCompra();
+        this.cuentaInversion = dto.getCuentaInversion();
+    }
+
+    /**
+     * Realiza la compra de un Bono de Ahorro (CTA).
+     * <p>
+     * Este método crea un objeto {@link BonoAhorro} a partir del bono obtenido
+     * mediante su clave, valida el estado del bono, determina el número de
+     * aportes según el plazo (CTA14, CTA27 o CTA53) y registra una transacción
+     * de compra.
+     * Además, genera los períodos de ahorro y ejecuta un hilo para procesar la
+     * transacción de manera asíncrona.
+     * </p>
+     *
+     * @param rqsv004 objeto de solicitud que contiene la sesión, el bono y el
+     *                contenedor de respuesta {@link RQSV004#getRsb003()}
+     * @return ResponseEntity con el objeto {@link RSB003} que encapsula la
+     *         transacción realizada o un error en caso de fallo
+     */
     public ResponseEntity<RSB003> comprarCTA(final RQSV004 rqsv004) {
 
         RSB003 rsb003 = rqsv004.getRsb003();
@@ -122,7 +241,8 @@ public class Bono003BZ {
             return rsb003.notFound(NO_SE_ENCONTRO_LA_CUENTA_DESTINO);
         } else if (transaccion.getOrigen().equals(transaccion.getDestino())) {
             return rsb003.badRequest(LA_CUENTA_SON_LA_MISMA);
-        } if (transaccion.getOrigen().getSaldo() < transaccion.getMonto()) {
+        }
+        if (transaccion.getOrigen().getSaldo() < transaccion.getMonto()) {
             return rsb003.conflict(EL_SALDO_DEL_ORDENANTE_ES_INSUFICIENTE);
         }
 
@@ -150,36 +270,17 @@ public class Bono003BZ {
 
         periodos.get(0).setTransaccion(transaccionRepository.save(transaccion));
 
-        Thread hilo = new Thread(() -> {
-            try {
-                Thread.sleep(CINCO_SEGUNDO);
-                if (transaccionRepository.findByClave(bonoAhorro.getPeriodos()
-                        .get(0).getTransaccion().getClave()).get().getEstatus()
-                        .equals(activo)) {
-                    bonoAhorro.setEstatus(activo);
-                    bonoAhorro.getPeriodos().stream().forEach(x -> {
-                        x.setEstatus(pendiente);
-                    });
-                    bonoAhorro.getPeriodos().get(0).setEstatus(activo);
-                    LocalDate hoy = LocalDate.now();
-                    bonoAhorro.getPeriodos().get(0).setFechaAportacion(hoy);
-                    bonoAhorro.getPeriodos().stream().forEach(x -> {
-                        bonoAhorroPeriodoRepository.save(x);
-                    });
-                    bonoAhorro.setAportaciones(bonoAhorro.getAportacion());
-                    bonoAhorroRepository.save(bonoAhorro);
-                } else {
-                    bonoAhorro.getPeriodos().stream().forEach(x -> {
-                        bonoAhorroPeriodoRepository.delete(x);
-                    });
-                    bonoAhorroRepository.delete(bonoAhorro);
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
-        hilo.setDaemon(true);
-        hilo.start();
+        Bono003BzTrDTO dto = new Bono003BzTrDTO();
+        dto.setActivo(activo);
+        dto.setTransaccionRepository(transaccionRepository);
+        dto.setBonoAhorro(bonoAhorro);
+        dto.setPendiente(pendiente);
+        dto.setBonoAhorroPeriodoRepository(bonoAhorroPeriodoRepository);
+        dto.setBonoAhorroRepository(bonoAhorroRepository);
+        Bono003BzTr hilo = new Bono003BzTr(dto);
+        Thread thread = new Thread(hilo);
+        thread.setDaemon(true);
+        thread.start();
         return rsb003.ok(transaccion);
     }
 }
