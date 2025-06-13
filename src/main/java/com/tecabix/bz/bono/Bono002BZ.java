@@ -26,20 +26,22 @@ public class Bono002BZ {
     /**
      * Repositorio para acceder a la entidad BonoAhorro.
      */
-    private BonoAhorroRepository bonoAhorroRepository;
+    private final BonoAhorroRepository bonoAhorroRepository;
+
     /**
      * Repositorio para acceder a la entidad BonoInversion.
      */
-    private BonoInversionRepository bonoInversionRepository;
+    private final BonoInversionRepository bonoInversionRepository;
+
     /**
      * Repositorio para acceder a la entidad BonoPago.
      */
-    private BonoPagoRepository bonoPagoRepository;
+    private final BonoPagoRepository bonoPagoRepository;
 
     /**
      * Indica si el bono está activo.
      */
-    private Integer activo;
+    private final Integer activo;
 
     /**
      * Constructor que inicializa los repositorios y el estado activo desde el

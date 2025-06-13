@@ -32,7 +32,6 @@ public class Bono006BzTrDTO {
      */
     private BonoAhorroRepository bonoAhorroRepository;
 
-
     /**
      * Obtiene el bono de ahorro asociado.
      * @return el bono de ahorro

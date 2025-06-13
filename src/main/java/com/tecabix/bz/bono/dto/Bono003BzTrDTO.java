@@ -12,22 +12,27 @@ public class Bono003BzTrDTO {
      * Estado "activo" obtenido desde el catálogo.
      */
     private Catalogo activo;
+
     /**
      * Repositorio para acceder a la entidad Transaccion.
      */
     private TransaccionRepository transaccionRepository;
+
     /**
      * Repositorio para acceder a la entidad Bono Ahorro.
      */
     private BonoAhorro bonoAhorro;
+
     /**
      * Estado "Pendiente" obtenido desde el catálogo.
      */
     private Catalogo pendiente;
+
     /**
      * Repositorio para acceder a la entidad BonoAhorroPeriodo.
      */
     private BonoAhorroPeriodoRepository bonoAhorroPeriodoRepository;
+
     /**
      * Repositorio para acceder a la entidad BonoAhorro.
      */

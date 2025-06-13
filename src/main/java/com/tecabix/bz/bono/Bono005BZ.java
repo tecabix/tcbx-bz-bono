@@ -34,41 +34,47 @@ public class Bono005BZ {
     /**
      * Repositorio para acceder a la entidad BonoAhorro.
      */
-    private BonoAhorroRepository bonoAhorroRepository;
+    private final BonoAhorroRepository bonoAhorroRepository;
+
     /**
      * Repositorio para acceder a la entidad Transaccion.
      */
-    private TransaccionRepository transaccionRepository;
+    private final TransaccionRepository transaccionRepository;
+
     /**
      * Repositorio para acceder a la entidad Cuenta.
      */
-    private CuentaRepository cuentaRepository;
+    private final CuentaRepository cuentaRepository;
+
     /**
      * Repositorio para acceder a la entidad BonoAhorroPeriodo.
      */
-    private BonoAhorroPeriodoRepository bonoAhorroPeriodoRepository;
+    private final BonoAhorroPeriodoRepository bonoAhorroPeriodoRepository;
 
     /**
      * Estado "activo" obtenido desde el catálogo.
      */
-    private Catalogo activo;
+    private final Catalogo activo;
+
     /**
      * Estado "Pendiente" obtenido desde el catálogo.
      */
-    private Catalogo pendiente;
+    private final Catalogo pendiente;
+
     /**
      * Estado "Eliminado" obtenido desde el catálogo.
      */
-    private Catalogo eliminado;
+    private final Catalogo eliminado;
+
     /**
      * Tipo de transacción "Aportación" obtenido desde el catálogo.
      */
-    private Catalogo aportacion;
+    private final Catalogo aportacion;
 
     /**
      * Cuenta de inversión asignada.
      */
-    private Cuenta cuentaInversion;
+    private final Cuenta cuentaInversion;
 
     /**
      * Bono no encontrado.

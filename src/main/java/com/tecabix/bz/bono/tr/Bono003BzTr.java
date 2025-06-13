@@ -15,7 +15,6 @@ import com.tecabix.db.repository.TransaccionRepository;
 
 public class Bono003BzTr implements Runnable {
 
-
     /**
      * Cinco segundos en milisegundos.
      */
@@ -24,27 +23,32 @@ public class Bono003BzTr implements Runnable {
     /**
      * Estado "activo" obtenido desde el catálogo.
      */
-    private Catalogo activo;
+    private final Catalogo activo;
+
     /**
      * Repositorio para acceder a la entidad Transaccion.
      */
-    private TransaccionRepository transaccionRepository;
+    private final TransaccionRepository transaccionRepository;
+
     /**
      * Bono de ahorro asociado.
      */
-    private BonoAhorro bonoAhorro;
+    private final BonoAhorro bonoAhorro;
+
     /**
      * Estado "Pendiente" obtenido desde el catálogo.
      */
-    private Catalogo pendiente;
+    private final Catalogo pendiente;
+
     /**
      * Repositorio para acceder a la entidad BonoAhorroPeriodo.
      */
-    private BonoAhorroPeriodoRepository bonoAhorroPeriodoRepository;
+    private final BonoAhorroPeriodoRepository bonoAhorroPeriodoRepository;
+
     /**
      * Repositorio para acceder a la entidad BonoAhorro.
      */
-    private BonoAhorroRepository bonoAhorroRepository;
+    private final BonoAhorroRepository bonoAhorroRepository;
 
     /**
      * Constructor que inicializa una instancia de {@code Bono003BzTr}

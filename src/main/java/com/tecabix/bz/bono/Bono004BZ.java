@@ -21,7 +21,7 @@ public class Bono004BZ {
     /**
      * Repositorio para acceder a la entidad BonoAhorro.
      */
-    private BonoAhorroRepository bonoAhorroRepository;
+    private final BonoAhorroRepository bonoAhorroRepository;
 
     /**
      * Mensaje bono no encontrado.

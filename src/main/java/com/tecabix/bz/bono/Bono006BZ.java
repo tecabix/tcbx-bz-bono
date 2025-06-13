@@ -29,41 +29,47 @@ public class Bono006BZ {
     /**
      * Repositorio para acceder a la entidad BonoAhorro.
      */
-    private BonoAhorroRepository bonoAhorroRepository;
+    private final BonoAhorroRepository bonoAhorroRepository;
+
     /**
      * Repositorio para acceder a la entidad Cuenta.
      */
-    private CuentaRepository cuentaRepository;
+    private final CuentaRepository cuentaRepository;
+
     /**
      * Repositorio para acceder a la entidad Transaccion.
      */
-    private TransaccionRepository transaccionRepository;
+    private final TransaccionRepository transaccionRepository;
+
     /**
      * Repositorio para acceder a la entidad BonoAhorroPeriodo.
      */
-    private BonoAhorroPeriodoRepository bonoAhorroPeriodoRepository;
+    private final BonoAhorroPeriodoRepository bonoAhorroPeriodoRepository;
 
     /**
      * Estado "activo" obtenido desde el catálogo.
      */
-    private Catalogo activo;
+    private final Catalogo activo;
+
     /**
      * Tipo de transacción "Venta" obtenido desde el catálogo.
      */
-    private Catalogo venta;
+    private final Catalogo venta;
+
     /**
      * Estado "Eliminado" obtenido desde el catálogo.
      */
-    private Catalogo eliminado;
+    private final Catalogo eliminado;
+
     /**
      * Estado "Pendiente" obtenido desde el catálogo.
      */
-    private Catalogo pendiente;
+    private final Catalogo pendiente;
 
     /**
      * Cuenta de inversión asignada.
      */
-    private Cuenta cuentaInversion;
+    private final Cuenta cuentaInversion;
 
     /**
      * 52 Semanas = 1 año.
@@ -84,6 +90,7 @@ public class Bono006BZ {
         EL_SALDO_DEL_ORDENANTE_ES_INSUFICIENTE = "El saldo del ordenante es insuficiente";
         LA_CUENTA_SON_LA_MISMA = "La cuenta de origen y destino son la misma.";
     }
+
     /**
      * Bono no pertenece a la sesión.
      */

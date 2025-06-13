@@ -20,7 +20,7 @@ public class Bono001BZ {
     /**
      * Repositorio para acceder a la entidad Bono.
      */
-    private BonoRepository bonoRepository;
+    private final BonoRepository bonoRepository;
 
     /**
      * Constructor de la clase {@code Bono001BZ}.

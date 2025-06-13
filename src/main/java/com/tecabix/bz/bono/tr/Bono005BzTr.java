@@ -35,48 +35,47 @@ public class Bono005BzTr implements Runnable {
     /**
      * Estado "Eliminado" obtenido desde el catálogo.
      */
-    private Catalogo eliminado;
+    private final Catalogo eliminado;
 
     /**
      * Período actual del bono de ahorro.
      */
-    private BonoAhorroPeriodo periodoActual;
+    private final BonoAhorroPeriodo periodoActual;
 
     /**
      * Estado "activo" obtenido desde el catálogo.
      */
-    private Catalogo activo;
+    private final Catalogo activo;
 
     /**
      * Repositorio para acceder a la entidad Transaccion.
      */
-    private TransaccionRepository transaccionRepository;
+    private final TransaccionRepository transaccionRepository;
 
     /**
      * Bono de ahorro asociado.
      */
-    private BonoAhorro bonoAhorro;
+    private final BonoAhorro bonoAhorro;
 
     /**
      * ID del usuario.
      */
-    private long idUsuario;
+    private final long idUsuario;
 
     /**
      * Repositorio para acceder a la entidad BonoAhorroPeriodo.
      */
-    private BonoAhorroPeriodoRepository bonoAhorroPeriodoRepository;
+    private final BonoAhorroPeriodoRepository bonoAhorroPeriodoRepository;
 
     /**
      * Repositorio para acceder a la entidad BonoAhorro.
      */
-    private BonoAhorroRepository bonoAhorroRepository;
+    private final BonoAhorroRepository bonoAhorroRepository;
 
     /**
      * Estado "Pendiente" obtenido desde el catálogo.
      */
-    private Catalogo pendiente;
-
+    private final Catalogo pendiente;
 
     /**
      * Constructor que inicializa una instancia de {@code Bono005BzTr}

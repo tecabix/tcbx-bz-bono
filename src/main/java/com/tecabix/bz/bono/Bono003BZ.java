@@ -34,44 +34,52 @@ public class Bono003BZ {
     /**
      * Repositorio para acceder a la entidad Bono.
      */
-    private BonoRepository bonoRepository;
+    private final BonoRepository bonoRepository;
+
     /**
      * Repositorio para acceder a la entidad Cuenta.
      */
-    private CuentaRepository cuentaRepository;
+    private final CuentaRepository cuentaRepository;
+
     /**
      * Repositorio para acceder a la entidad BonoAhorro.
      */
-    private BonoAhorroRepository bonoAhorroRepository;
+    private final BonoAhorroRepository bonoAhorroRepository;
+
     /**
      * Repositorio para acceder a la entidad BonoAhorroPeriodo.
      */
-    private BonoAhorroPeriodoRepository bonoAhorroPeriodoRepository;
+    private final BonoAhorroPeriodoRepository bonoAhorroPeriodoRepository;
+
     /**
      * Repositorio para acceder a la entidad Transaccion.
      */
-    private TransaccionRepository transaccionRepository;
+    private final TransaccionRepository transaccionRepository;
+
     /**
      * Estado "activo" obtenido desde el catálogo.
      */
-    private Catalogo activo;
+    private final Catalogo activo;
+
     /**
      * Estado "Pendiente" obtenido desde el catálogo.
      */
-    private Catalogo pendiente;
+    private final Catalogo pendiente;
+
     /**
      * Estado "Eliminado" obtenido desde el catálogo.
      */
-    private Catalogo eliminado;
+    private final Catalogo eliminado;
 
     /**
      * Tipo de transacción "Compra" obtenido desde el catálogo.
      */
-    private Catalogo compra;
+    private final Catalogo compra;
+
     /**
      * Cuenta de inversión asignada.
      */
-    private Cuenta cuentaInversion;
+    private final Cuenta cuentaInversion;
 
     /**
      * Mensaje cuando no se encuentra el bono.
@@ -79,6 +87,7 @@ public class Bono003BZ {
     private static final String NO_SE_ENCONTRO_EL_BONO;
 
     static {
+
         NO_SE_ENCONTRO_EL_BONO = "No se encontró el bono.";
         EL_ESTADO_DEBE_ESTAR_PENDIENTE = "El estado del bono debe estar como pendiente.";
         NO_SE_ENCONTRO_LA_CUENTA_DE_ORIGEN = "No se encontró la cuenta de origen.";
@@ -200,10 +209,10 @@ public class Bono003BZ {
 
         String plazo = bonoAhorro.getBono().getTipoPlazo().getNombre();
         int numeroAporte = switch (plazo) {
-        case CTA14 -> CTA_14;
-        case CTA27 -> CTA_27;
-        case CTA53 -> CTA_53;
-        default -> 0;
+            case CTA14 -> CTA_14;
+            case CTA27 -> CTA_27;
+            case CTA53 -> CTA_53;
+            default -> 0;
         };
 
         if (numeroAporte == 0) {
