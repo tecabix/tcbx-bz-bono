@@ -4,29 +4,58 @@ import com.tecabix.db.entity.Catalogo;
 import com.tecabix.db.repository.BonoAhorroRepository;
 
 /**
-*
-* @author Ramirez Urrutia Angel Abinadi
-*/
+ *
+ * @author Ramirez Urrutia Angel Abinadi
+ */
 public class Bono004BzDTO {
 
+    /**
+     * Repositorio para acceder a la entidad BonoAhorro.
+     */
+    private BonoAhorroRepository bonoAhorroRepository;
 
-	private BonoAhorroRepository bonoAhorroRepository;
-	
-	private Catalogo activo;
+    /**
+     * Estado "activo" obtenido desde el catálogo.
+     */
+    private Catalogo activo;
 
-	public BonoAhorroRepository getBonoAhorroRepository() {
-		return bonoAhorroRepository;
-	}
+    /**
+     * Obtiene el repositorio de bonos de ahorro.
+     *
+     * @return el objeto {@link BonoAhorroRepository} que gestiona el acceso a
+     *         los datos de bonos de ahorro.
+     */
+    public BonoAhorroRepository getBonoAhorroRepository() {
+        return bonoAhorroRepository;
+    }
 
-	public void setBonoAhorroRepository(BonoAhorroRepository bonoAhorroRepository) {
-		this.bonoAhorroRepository = bonoAhorroRepository;
-	}
+    /**
+     * Establece el repositorio de bonos de ahorro.
+     *
+     * @param repository el objeto {@link BonoAhorroRepository} a
+     *                             establecer.
+     */
+    public void setBonoAhorroRepository(
+            final BonoAhorroRepository repository) {
+        this.bonoAhorroRepository = repository;
+    }
 
-	public Catalogo getActivo() {
-		return activo;
-	}
+    /**
+     * Obtiene el catálogo activo.
+     *
+     * @return el objeto {@link Catalogo} que representa el estado activo.
+     */
+    public Catalogo getActivo() {
+        return activo;
+    }
 
-	public void setActivo(Catalogo activo) {
-		this.activo = activo;
-	}
+    /**
+     * Establece el catálogo activo.
+     *
+     * @param estatus el objeto {@link Catalogo} que representa el estado activo
+     *               a establecer.
+     */
+    public void setActivo(final Catalogo estatus) {
+        this.activo = estatus;
+    }
 }

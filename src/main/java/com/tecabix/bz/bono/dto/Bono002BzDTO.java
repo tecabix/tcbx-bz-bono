@@ -5,48 +5,107 @@ import com.tecabix.db.repository.BonoInversionRepository;
 import com.tecabix.db.repository.BonoPagoRepository;
 
 /**
-*
-* @author Ramirez Urrutia Angel Abinadi
-*/
+ *
+ * @author Ramirez Urrutia Angel Abinadi
+ */
 public class Bono002BzDTO {
 
-	private BonoAhorroRepository bonoAhorroRepository;
-	
-	private BonoInversionRepository bonoInversionRepository;
-	
-	private BonoPagoRepository bonoPagoRepository;
-	
-	private Integer activo;
+    /**
+     * Repositorio para acceder a la entidad BonoAhorro.
+     */
+    private BonoAhorroRepository bonoAhorroRepository;
 
-	public BonoAhorroRepository getBonoAhorroRepository() {
-		return bonoAhorroRepository;
-	}
+    /**
+     * Repositorio para acceder a la entidad BonoInversion.
+     */
+    private BonoInversionRepository bonoInversionRepository;
 
-	public void setBonoAhorroRepository(BonoAhorroRepository bonoAhorroRepository) {
-		this.bonoAhorroRepository = bonoAhorroRepository;
-	}
+    /**
+     * Repositorio para acceder a la entidad BonoPago.
+     */
+    private BonoPagoRepository bonoPagoRepository;
 
-	public BonoInversionRepository getBonoInversionRepository() {
-		return bonoInversionRepository;
-	}
+    /**
+     * Indica si el objeto está activo.
+     */
+    private Integer activo;
 
-	public void setBonoInversionRepository(BonoInversionRepository bonoInversionRepository) {
-		this.bonoInversionRepository = bonoInversionRepository;
-	}
+    /**
+     * Obtiene el repositorio de Bono Ahorro.
+     *
+     * @return una instancia de {@link BonoAhorroRepository}
+     */
+    public BonoAhorroRepository getBonoAhorroRepository() {
+        return bonoAhorroRepository;
+    }
 
-	public BonoPagoRepository getBonoPagoRepository() {
-		return bonoPagoRepository;
-	}
+    /**
+     * Establece el repositorio de Bono Ahorro.
+     *
+     * @param repository una instancia de {@link BonoAhorroRepository}
+     */
+    public void setBonoAhorroRepository(
+            final BonoAhorroRepository repository) {
+        this.bonoAhorroRepository = repository;
+    }
 
-	public void setBonoPagoRepository(BonoPagoRepository bonoPagoRepository) {
-		this.bonoPagoRepository = bonoPagoRepository;
-	}
+    /**
+     * Obtiene el repositorio de Bono Inversión.
+     *
+     * @return una instancia de {@link BonoInversionRepository}
+     */
+    public BonoInversionRepository getBonoInversionRepository() {
+        return bonoInversionRepository;
+    }
 
-	public Integer getActivo() {
-		return activo;
-	}
+    /**
+     * Establece el repositorio de Bono Inversión.
+     *
+     * @param repository una instancia de
+     *                                {@link BonoInversionRepository}
+     */
+    public void setBonoInversionRepository(
+            final BonoInversionRepository repository) {
+        this.bonoInversionRepository = repository;
+    }
 
-	public void setActivo(Integer activo) {
-		this.activo = activo;
-	}	
+    /**
+     * Obtiene el repositorio de Bono Pago.
+     *
+     * @return una instancia de {@link BonoPagoRepository}
+     */
+
+    public BonoPagoRepository getBonoPagoRepository() {
+        return bonoPagoRepository;
+    }
+
+    /**
+     * Establece el repositorio de Bono Pago.
+     *
+     * @param repository una instancia de {@link BonoPagoRepository}
+     */
+
+    public void setBonoPagoRepository(
+            final BonoPagoRepository repository) {
+        this.bonoPagoRepository = repository;
+    }
+
+    /**
+     * Obtiene el estado de actividad del objeto.
+     *
+     * @return un {@link Integer} que representa si el objeto está activo.
+     */
+    public Integer getActivo() {
+        return activo;
+    }
+
+    /**
+     * Establece el estado de actividad del objeto.
+     *
+     * @param estatus un {@link Integer} que representa el nuevo estado de
+     *               actividad.
+     */
+    public void setActivo(final Integer estatus) {
+        this.activo = estatus;
+    }
 }
