@@ -8,93 +8,221 @@ import com.tecabix.db.repository.CuentaRepository;
 import com.tecabix.db.repository.TransaccionRepository;
 
 /**
-*
-* @author Ramirez Urrutia Angel Abinadi
-*/
+ *
+ * @author Ramirez Urrutia Angel Abinadi
+ */
 public class Bono005BzDTO {
 
+    /**
+     * Repositorio para acceder a la entidad BonoAhorro.
+     */
+    private BonoAhorroRepository bonoAhorroRepository;
 
-	private BonoAhorroRepository bonoAhorroRepository;
-	private TransaccionRepository transaccionRepository;
-	private CuentaRepository cuentaRepository;
-	private BonoAhorroPeriodoRepository bonoAhorroPeriodoRepository;
-	
-	private Catalogo activo;
-	private Catalogo pendiente;
-	private Catalogo eliminado;
-	private Catalogo aportacion;
-	
-	private Cuenta cuentaInversion;
+    /**
+     * Repositorio para acceder a la entidad Transaccion.
+     */
+    private TransaccionRepository transaccionRepository;
 
-	public BonoAhorroRepository getBonoAhorroRepository() {
-		return bonoAhorroRepository;
-	}
+    /**
+     * Repositorio para acceder a la entidad Cuenta.
+     */
+    private CuentaRepository cuentaRepository;
 
-	public void setBonoAhorroRepository(BonoAhorroRepository bonoAhorroRepository) {
-		this.bonoAhorroRepository = bonoAhorroRepository;
-	}
+    /**
+     * Repositorio para acceder a la entidad BonoAhorroPeriodo.
+     */
+    private BonoAhorroPeriodoRepository bonoAhorroPeriodoRepository;
 
-	public TransaccionRepository getTransaccionRepository() {
-		return transaccionRepository;
-	}
+    /**
+     * Estado "activo" obtenido desde el catálogo.
+     */
+    private Catalogo activo;
 
-	public void setTransaccionRepository(TransaccionRepository transaccionRepository) {
-		this.transaccionRepository = transaccionRepository;
-	}
+    /**
+     * Estado "Pendiente" obtenido desde el catálogo.
+     */
+    private Catalogo pendiente;
 
-	public CuentaRepository getCuentaRepository() {
-		return cuentaRepository;
-	}
+    /**
+     * Estado "Eliminado" obtenido desde el catálogo.
+     */
+    private Catalogo eliminado;
 
-	public void setCuentaRepository(CuentaRepository cuentaRepository) {
-		this.cuentaRepository = cuentaRepository;
-	}
+    /**
+     * Tipo de transacción "Aportación" obtenido desde el catálogo.
+     */
+    private Catalogo aportacion;
 
-	public BonoAhorroPeriodoRepository getBonoAhorroPeriodoRepository() {
-		return bonoAhorroPeriodoRepository;
-	}
+    /**
+     * Cuenta de inversión asignada.
+     */
+    private Cuenta cuentaInversion;
 
-	public void setBonoAhorroPeriodoRepository(BonoAhorroPeriodoRepository bonoAhorroPeriodoRepository) {
-		this.bonoAhorroPeriodoRepository = bonoAhorroPeriodoRepository;
-	}
+    /**
+     * Obtiene el repositorio de Bono Ahorro.
+     *
+     * @return el repositorio de Bono Ahorro
+     */
+    public BonoAhorroRepository getBonoAhorroRepository() {
+        return bonoAhorroRepository;
+    }
 
-	public Catalogo getActivo() {
-		return activo;
-	}
+    /**
+     * Establece el repositorio de Bono Ahorro.
+     *
+     * @param repository el repositorio de Bono Ahorro a establecer
+     */
+    public void setBonoAhorroRepository(
+            final BonoAhorroRepository repository) {
+        this.bonoAhorroRepository = repository;
+    }
 
-	public void setActivo(Catalogo activo) {
-		this.activo = activo;
-	}
+    /**
+     * Obtiene el repositorio de Transacción.
+     *
+     * @return el repositorio de Transacción
+     */
+    public TransaccionRepository getTransaccionRepository() {
+        return transaccionRepository;
+    }
 
-	public Catalogo getPendiente() {
-		return pendiente;
-	}
+    /**
+     * Establece el repositorio de Transacción.
+     *
+     * @param repository el repositorio de Transacción a establecer
+     */
+    public void setTransaccionRepository(
+            final TransaccionRepository repository) {
+        this.transaccionRepository = repository;
+    }
 
-	public void setPendiente(Catalogo pendiente) {
-		this.pendiente = pendiente;
-	}
+    /**
+     * Obtiene el repositorio de Cuenta.
+     *
+     * @return el repositorio de Cuenta
+     */
+    public CuentaRepository getCuentaRepository() {
+        return cuentaRepository;
+    }
 
-	public Catalogo getEliminado() {
-		return eliminado;
-	}
+    /**
+     * Establece el repositorio de Cuenta.
+     *
+     * @param repository el repositorio de Cuenta a establecer
+     */
+    public void setCuentaRepository(
+            final CuentaRepository repository) {
+        this.cuentaRepository = repository;
+    }
 
-	public void setEliminado(Catalogo eliminado) {
-		this.eliminado = eliminado;
-	}
+    /**
+     * Obtiene el repositorio de Bono Ahorro Periodo.
+     *
+     * @return el repositorio de Bono Ahorro Periodo
+     */
+    public BonoAhorroPeriodoRepository getBonoAhorroPeriodoRepository() {
+        return bonoAhorroPeriodoRepository;
+    }
 
-	public Catalogo getAportacion() {
-		return aportacion;
-	}
+    /**
+     * Establece el repositorio de Bono Ahorro Periodo.
+     *
+     * @param repository el repositorio de Bono Ahorro Periodo
+     *        a establecer.
+     */
+    public void setBonoAhorroPeriodoRepository(
+            final BonoAhorroPeriodoRepository repository) {
+        this.bonoAhorroPeriodoRepository = repository;
+    }
 
-	public void setAportacion(Catalogo aportacion) {
-		this.aportacion = aportacion;
-	}
 
-	public Cuenta getCuentaInversion() {
-		return cuentaInversion;
-	}
+    /**
+     * Obtiene el catálogo de estado "Activo".
+     *
+     * @return el catálogo "Activo"
+     */
+    public Catalogo getActivo() {
+        return activo;
+    }
 
-	public void setCuentaInversion(Cuenta cuentaInversion) {
-		this.cuentaInversion = cuentaInversion;
-	}
+    /**
+     * Establece el catálogo de estado "Activo".
+     *
+     * @param estatus el catálogo "Activo" a establecer
+     */
+    public void setActivo(final Catalogo estatus) {
+        this.activo = estatus;
+    }
+
+    /**
+     * Obtiene el catálogo de estado "Pendiente".
+     *
+     * @return el catálogo "Pendiente"
+     */
+    public Catalogo getPendiente() {
+        return pendiente;
+    }
+
+    /**
+     * Establece el catálogo de estado "Pendiente".
+     *
+     * @param estatus el catálogo "Pendiente" a establecer
+     */
+    public void setPendiente(final Catalogo estatus) {
+        this.pendiente = estatus;
+    }
+
+    /**
+     * Obtiene el catálogo de estado "Eliminado".
+     *
+     * @return el catálogo "Eliminado"
+     */
+    public Catalogo getEliminado() {
+        return eliminado;
+    }
+
+    /**
+     * Establece el catálogo de estado "Eliminado".
+     *
+     * @param estatus el catálogo "Eliminado" a establecer
+     */
+    public void setEliminado(final Catalogo estatus) {
+        this.eliminado = estatus;
+    }
+
+    /**
+     * Obtiene el catálogo de tipo "Aportación".
+     *
+     * @return el catálogo "Aportación"
+     */
+    public Catalogo getAportacion() {
+        return aportacion;
+    }
+
+    /**
+     * Establece el catálogo de tipo "Aportación".
+     *
+     * @param tipo el catálogo "Aportación" a establecer
+     */
+    public void setAportacion(final Catalogo tipo) {
+        this.aportacion = tipo;
+    }
+
+    /**
+     * Obtiene la cuenta de inversión.
+     *
+     * @return la cuenta de inversión
+     */
+    public Cuenta getCuentaInversion() {
+        return cuentaInversion;
+    }
+
+    /**
+     * Establece la cuenta de inversión.
+     *
+     * @param inversion la cuenta de inversión a establecer
+     */
+    public void setCuentaInversion(final Cuenta inversion) {
+        this.cuentaInversion = inversion;
+    }
 }
